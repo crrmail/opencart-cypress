@@ -32,6 +32,7 @@ describe('register', () => {
 
 
     })
+    
     it('Test case 2 : registeration when invalid data should fail', () => {
         cy.get('.dropdown > .dropdown-toggle > .fa').click()
         cy.get('.dropdown-menu > :nth-child(1) > a').click()
@@ -45,10 +46,31 @@ describe('register', () => {
         cy.get('[type="checkbox"]').click()
         cy.get('.pull-right > .btn').click()
 
-        // message alert
+        // pop up message alert
         cy.get('.alert').should('be.visible')
         cy.get('.alert').should('have.text',' Warning: E-Mail Address is already registered!')
 
+
+    })
+
+    it.only('Test case 3 :registeration when have null data should fail', () => {
+        cy.get('.dropdown > .dropdown-toggle > .fa').click()
+        cy.get('.dropdown-menu > :nth-child(1) > a').click()
+
+        cy.get('[type="checkbox"]').click()
+        cy.get('.pull-right > .btn').click()
+
+        // message alert
+        cy.get(':nth-child(3) > .col-sm-10 > .text-danger').should('be.visible')
+        cy.get(':nth-child(3) > .col-sm-10 > .text-danger').should('have.text','First Name must be between 1 and 32 characters!')
+        cy.get(':nth-child(4) > .col-sm-10 > .text-danger').should('be.visible')
+        cy.get(':nth-child(4) > .col-sm-10 > .text-danger').should('have.text','Last Name must be between 1 and 32 characters!')
+        cy.get(':nth-child(5) > .col-sm-10 > .text-danger').should('be.visible')
+        cy.get(':nth-child(5) > .col-sm-10 > .text-danger').should('have.text','E-Mail Address does not appear to be valid!')
+        cy.get(':nth-child(6) > .col-sm-10 > .text-danger').should('be.visible')
+        cy.get(':nth-child(6) > .col-sm-10 > .text-danger').should('have.text','Telephone must be between 3 and 32 characters!')
+        cy.get(':nth-child(2) > .has-error > .col-sm-10 > .text-danger').should('be.visible')
+        cy.get(':nth-child(2) > .has-error > .col-sm-10 > .text-danger').should('have.text','Password must be between 4 and 20 characters!')
 
     })
 })
