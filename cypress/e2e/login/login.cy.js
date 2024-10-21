@@ -28,7 +28,8 @@ describe('login', () => {
 
         // pop up message error alert
         cy.get('.alert').should('be.visible')
-        cy.get('.alert').should('have.text','Warning: No match for E-Mail Address and/or Password.')
+        //cy.get('.alert').should('have.text','Warning: No match for E-Mail Address and/or Password.')
+        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
     })
     
     it('tc006 : Login fails with invalid email', () => {
@@ -36,26 +37,33 @@ describe('login', () => {
 
         // pop up message error alert
         cy.get('.alert').should('be.visible')
-        cy.url().should('have.text','Warning: No match for E-Mail Address and/or Password.')
- 
+        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
+
     })
     it('tc007 : Login fails with missing email or password', () => {
         cy.loginWithEmailandPassword('','')
 
         // pop up message error alert
         cy.get('.alert').should('be.visible')
-        cy.url().should('have.text','Warning: No match for E-Mail Address and/or Password.')
-
+        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
     })
     it.only('tc008 : Login fails due to exceeded login attempts', () => {
         cy.loginWithEmailandPassword(testData.invalidEmail,testData.invalidPassword)
-   
+
+
       // pop up message error alert
       cy.get('.alert').should('be.visible')
-      //cy.get('.alert').should('have.text','Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.')
-      //cy.get('.alert').should('have.text','&nbsp;Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.')
-      cy.get('.alert').should('have.text', '&nbsp;Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.')
+      cy.get('.alert').should('have.text', ' Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.')
       
+    })
+    it('tc009 : Forgot password request successful',() => {
+        cy.get('form > :nth-child(2) > a').click()
+        cy.get('#input-email').type(testData.validEmail)
+        cy.get('.pull-right > .btn').click()
+
+        // pop up message alert
+        cy.get('.alert').should('be.visible')
+        cy.get('.alert').should('have.text',' An email with a confirmation link has been sent your email address.')
     })
 
 
