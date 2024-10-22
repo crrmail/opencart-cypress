@@ -29,3 +29,7 @@ Cypress.Commands.add('loginWithEmailandPassword', (email,password) => {
     cy.get('#input-password').type(password)
     cy.get('form > .btn').click()
 })
+Cypress.Commands.add('popupMessageErrorAlert', () => {
+    cy.get('.alert').should('be.visible')
+    cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
+})

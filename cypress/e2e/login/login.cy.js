@@ -18,43 +18,36 @@ describe('login', () => {
         cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
         cy.get('.dropdown-menu > :nth-child(5) > a').click()
         cy.get('.pull-right > .btn').click()
-
     })
     it('tc005 : Login fails with invalid email and password', () => {
-        cy.get('#input-email').type(testData.invalidEmail)
-        cy.get('#input-password').type(testData.invalidPassword)
-        cy.get('form > .btn').click()
-        //cy.loginWithEmailandPassword(testData.invalidEmail,testData.invalidPassword)
-
-        // pop up message error alert
-        cy.get('.alert').should('be.visible')
-        //cy.get('.alert').should('have.text','Warning: No match for E-Mail Address and/or Password.')
-        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
-    })
-    
-    it('tc006 : Login fails with invalid email', () => {
-        cy.loginWithEmailandPassword(testData.invalidEmail,testData.validPassword)
-
-        // pop up message error alert
-        cy.get('.alert').should('be.visible')
-        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
-
-    })
-    it('tc007 : Login fails with missing email or password', () => {
-        cy.loginWithEmailandPassword('','')
-
-        // pop up message error alert
-        cy.get('.alert').should('be.visible')
-        cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
-    })
-    it.only('tc008 : Login fails due to exceeded login attempts', () => {
+        // login with invalid email and password
         cy.loginWithEmailandPassword(testData.invalidEmail,testData.invalidPassword)
 
+        // pop up message error alert
+        cy.popupMessageErrorAlert()
+    })
+    it('tc006 : Login fails with missing email and password', () => {
+        // login with both email and password missing
+        cy.get('form > .btn').click()
 
-      // pop up message error alert
-      cy.get('.alert').should('be.visible')
-      cy.get('.alert').should('have.text', ' Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.')
-      
+        // pop up message error alert
+        cy.popupMessageErrorAlert()
+    })
+    it('tc007 : Login fails with missing email',() => {
+        // login with missing email
+        cy.get('#input-password').type('1234')
+        cy.get('form > .btn').click()
+
+        // pop up message error alert
+        cy.popupMessageErrorAlert()
+    })
+    it('tc008 : Login fails with missing password',() => {
+        // login with missing password
+        cy.get('#input-email').type('example@email.com')
+        cy.get('form > .btn').click()
+
+        // pop up message error alert
+        cy.popupMessageErrorAlert()
     })
     it('tc009 : Forgot password request successful',() => {
         cy.get('form > :nth-child(2) > a').click()
