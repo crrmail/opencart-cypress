@@ -33,3 +33,7 @@ Cypress.Commands.add('popupMessageErrorAlert', () => {
     cy.get('.alert').should('be.visible')
     cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
 })
+Cypress.Commands.add('searchProduct',(produceName) => {
+    cy.get('.form-control').type(produceName)
+    cy.get('.input-group-btn > .btn').click()
+})
