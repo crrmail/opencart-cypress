@@ -16,7 +16,7 @@ describe('add item to favorites',() => {
         cy.get("[data-original-title=\"Add to Wish List\"]").click()
 
         // verify add item to favorites success
-        cy.get('.alert')
+        cy.get('.alert').should('be.visible')
         //cy.should('have.text',' Success: You have added MacBook to your wish list! ')
     })
     it('tc014 : Add Item to favorites without login',() => {
@@ -25,7 +25,7 @@ describe('add item to favorites',() => {
         cy.get("[data-original-title=\"Add to Wish List\"]").click()
 
         // verify add item to favorites success
-        cy.get('.alert')
+        cy.popupAlert()
         // เช็ค text
     })
     it('tc015 : View Items in favorites',() => {
