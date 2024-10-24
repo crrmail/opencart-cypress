@@ -1,4 +1,4 @@
-describe('search',() => {
+describe('search of product',() => {
     beforeEach(() => {
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
     })
@@ -19,11 +19,21 @@ describe('search',() => {
         cy.get('#content > h1').should('be.visible')
         cy.get('#content > h1').should('have.text','Search - Iph')
         cy.get('.img-responsive').should('be.visible')
+        cy.get('h4 > a').should('be.visible')
     })
-    it.only('tc012 : Search for a product with categories',() => {
+    it('tc012 : Search for a product with categories',() => {
         // search product
         cy.get('.input-group-btn > .btn').click()
-        cy.get('#content > .row > :nth-child(2)').click()
+        cy.get('#input-search').type('A')
+        // selcet categories
+        cy.get(':nth-child(2) > .form-control').select('Cameras')
+        cy.get('#button-search').click()
+
+        // verify search result
+        cy.get('#content > h1').should('be.visible')
+        cy.get('#content > h1').should('have.text','Search - A')
+        cy.get('.img-responsive').should('be.visible')
+        cy.get('h4 > a').should('be.visible')
 
     })
 })
