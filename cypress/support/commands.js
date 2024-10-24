@@ -37,3 +37,7 @@ Cypress.Commands.add('searchProduct',(produceName) => {
     cy.get('.form-control').type(produceName)
     cy.get('.input-group-btn > .btn').click()
 })
+Cypress.Commands.add('goToLoginFromHome',() => {
+    cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
+    cy.get('.dropdown-menu > :nth-child(2) > a').click()
+})

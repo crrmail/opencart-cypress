@@ -3,8 +3,7 @@ import testData from '../loginData.json'
 describe('login', () => {
     beforeEach(() => {
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
-        cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
-        cy.get('.dropdown-menu > :nth-child(2) > a').click()
+        cy.goToLoginFromHome()
         
     })
     it('tc004 : Login success with valid email and password', () => {
