@@ -34,6 +34,5 @@ describe('search of product',() => {
         cy.get('#content > h1').should('have.text','Search - A')
         cy.get('.img-responsive').should('be.visible')
         cy.get('h4 > a').should('be.visible')
-
     })
 })
