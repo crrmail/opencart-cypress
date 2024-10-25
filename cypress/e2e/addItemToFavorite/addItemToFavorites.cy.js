@@ -25,7 +25,7 @@ describe('add item to favorites',() => {
         cy.get("[data-original-title=\"Add to Wish List\"]").click()
 
         // verify add item to favorites success
-        cy.popupAlert()
+        cy.popupAlert(' You must ')
         // เช็ค text
     })
     it('tc015 : View Items in favorites',() => {
@@ -37,7 +37,7 @@ describe('add item to favorites',() => {
         // View Items in favorites
         cy.get('#wishlist-total').click()
 
-        // verify add item to favorites success
+        // verify item to favorites success
         cy.get('#content')
     })
     it('tc016 : Remove Item from favorites',() => {
