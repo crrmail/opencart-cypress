@@ -23,7 +23,7 @@ describe('Add item to cart',() => {
 
         // verify add item to cart success
     })
-    it('tc019 : View Items in Cart',() => {
+    it.only('tc019 : View Items in Cart',() => {
         // add item to cart
         cy.get('.nav > :nth-child(4) > a').click()
         cy.get("[onclick=\"cart.add('49', '1');\"]").click()

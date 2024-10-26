@@ -46,3 +46,48 @@ Cypress.Commands.add('goToLoginFromHome',() => {
     cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
     cy.get('.dropdown-menu > :nth-child(2) > a').click()
 })
+Cypress.Commands.add('addItemToCart',() => {
+    cy.get(':nth-child(7) > a').click()
+    cy.get("[onclick=\"cart.add('30', '1');\"]").click()
+    cy.get('#input-option226').select('Red')
+    cy.get('#button-cart').click()
+})
+Cypress.Commands.add('tc022',() => {
+    // add item to cart
+    cy.addItemToCart()
+
+    // checkout
+    cy.get(':nth-child(4) > a > .fa').click()
+    cy.get('.pull-right > .btn').click()
+
+    // select Guest Checkout
+    cy.get(':nth-child(4) > label > input').click()
+    cy.get('#button-account').click()
+})
+Cypress.Commands.add('personalInfo2',() => {
+    cy.get('#input-payment-firstname').type('David')
+    cy.get('#input-payment-lastname').type('Roger')
+    cy.get('#input-payment-email').type('david@email.com')
+    cy.get('#input-payment-telephone').type('0912223333')
+    cy.get('#input-payment-address-1').type('199 Bangna Tai')
+    cy.get('#input-payment-city').type('Bangna')
+    cy.get('#input-payment-postcode').type('10900')
+    cy.get('#input-payment-country').select('Thailand')
+    cy.get('#input-payment-zone').select('Bangkok')
+})
+Cypress.Commands.add('tc025',() => {
+    cy.tc022()
+    cy.personalInfo2()
+    cy.get('.checkbox > label > input').click()
+    cy.get('#button-guest').click()
+    cy.get('#collapse-shipping-address > .panel-body').should('be.visible')
+})
+Cypress.Commands.add('personalInfo3',() => {
+    cy.get('#input-shipping-firstname').type('David')
+    cy.get('#input-shipping-lastname').type('Roger')
+    cy.get('#input-shipping-address-1').type('199 Bangna Tai')
+    cy.get('#input-shipping-city').type('Bangna')
+    cy.get('#input-shipping-postcode').type('10900')
+    cy.get('#input-shipping-country').select('Thailand')
+    cy.get('#input-shipping-zone').type('Bangkok')    
+})
