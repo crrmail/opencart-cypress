@@ -46,19 +46,3 @@ Cypress.Commands.add('goToLoginFromHome',() => {
     cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
     cy.get('.dropdown-menu > :nth-child(2) > a').click()
 })
-Cypress.Commands.add('addItemToCart',() => {
-    cy.get(':nth-child(7) > a').click()
-    cy.get("[onclick=\"cart.add('30', '1');\"]").click()
-    cy.get('#input-option226').select('Red')
-    cy.get('#button-cart').click()
-})
-
-Cypress.Commands.add('personalInfo3',() => {
-    cy.get('#input-shipping-firstname').type('David')
-    cy.get('#input-shipping-lastname').type('Roger')
-    cy.get('#input-shipping-address-1').type('199 Bangna Tai')
-    cy.get('#input-shipping-city').type('Bangna')
-    cy.get('#input-shipping-postcode').type('10900')
-    cy.get('#input-shipping-country').select('Thailand')
-    cy.get('#input-shipping-zone').type('Bangkok')    
-})

@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { checkoutWithGuestUser,popupMessageErrorAlertInvalidEmailPassword,personalInfo2,personalInfo3,submitFormwithUncheck, } from './util'
+import { checkoutWithGuestUser,addItemToCart,popupMessageErrorAlertInvalidEmailPassword,personalInfo2,personalInfo3,submitFormwithUncheck, } from './util'
 
 describe('Checkout process', () => {
     beforeEach(() => {
@@ -14,7 +14,7 @@ describe('Checkout process', () => {
         cy.get('h1 > a').click()
 
         // add item to cart
-        cy.addItemToCart()
+        addItemToCart()
 
         // checkout
         cy.get(':nth-child(4) > a > .fa').click()
@@ -23,7 +23,7 @@ describe('Checkout process', () => {
 
     it('tc022 : Checkout without Login with (Guest)', () => {
         // add item to cart
-        cy.addItemToCart()
+        addItemToCart()
 
         // checkout
         cy.get(':nth-child(4) > a > .fa').click()
@@ -44,7 +44,7 @@ describe('Checkout process', () => {
         // Submit Form
         cy.get('#button-guest').click()
 
-        //
+        // 
         cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 
@@ -59,7 +59,7 @@ describe('Checkout process', () => {
         cy.get('#account > :nth-child(3) > .text-danger').should('be.visible')
     })
 
-    it.only('tc025 : Submit Form with all required data (Uncheck “My delivery and billing addresses are the same”)', () => {
+    it('tc025 : Submit Form with all required data (Uncheck “My delivery and billing addresses are the same”)', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
@@ -76,15 +76,17 @@ describe('Checkout process', () => {
         cy.get('#collapse-shipping-address > .panel-body').should('be.visible')
     })
 
-    it.only('tc026 : Submit Form with all required information', () => {
+    it('tc026 : Submit Form with all required information', () => {
         // tc 025
         submitFormwithUncheck()
 
         // Personal info step 3
         personalInfo3()
 
-        
         // submit
-        //cy.get('#button-guest-shipping').click()
+        cy.get('#button-guest-shipping').click()
+
+        // verify
+        cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 })

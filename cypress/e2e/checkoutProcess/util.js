@@ -1,6 +1,6 @@
 const checkoutWithGuestUser = () => {
     // add item to cart
-    cy.addItemToCart()
+    addItemToCart()
 
     // checkout
     cy.get(':nth-child(4) > a > .fa').click()
@@ -9,6 +9,13 @@ const checkoutWithGuestUser = () => {
     // select Guest Checkout
     cy.get(':nth-child(4) > label > input').click()
     cy.get('#button-account').click()
+}
+
+const addItemToCart = () => {
+    cy.get(':nth-child(7) > a').click()
+    cy.get("[onclick=\"cart.add('30', '1');\"]").click()
+    cy.get('#input-option226').select('Red')
+    cy.get('#button-cart').click()
 }
 
 const popupMessageErrorAlertInvalidEmailPassword = () => {
@@ -35,7 +42,7 @@ const personalInfo3 = () => {
     cy.get('#input-shipping-city').type('Bangna')
     cy.get('#input-shipping-postcode').type('10900')
     cy.get('#input-shipping-country').select('Thailand')
-    cy.get('#input-shipping-zone').type('Bangkok')
+    cy.get('#input-shipping-zone').select('Bangkok')
 }
 
 
@@ -44,7 +51,7 @@ const submitFormwithUncheck = () => {
     checkoutWithGuestUser()
 
     // Personal info step 2
-    cy.personalInfo2()
+    personalInfo2()
 
     // Uncheck “My delivery and billing addresses are the same”
     cy.get('.checkbox > label > input').click()
@@ -57,8 +64,10 @@ const submitFormwithUncheck = () => {
 
 export default {
     checkoutWithGuestUser,
+    addItemToCart,
     popupMessageErrorAlertInvalidEmailPassword,
     personalInfo2,
+    personalInfo3,
     submitFormwithUncheck,
     personalInfo3
 }
