@@ -46,7 +46,7 @@ const personalInfo3 = () => {
 }
 
 
-const submitFormwithUncheck = () => {
+const submitStep2FormwithUncheck = () => {
     // add and checkout item
     checkoutWithGuestUser()
 
@@ -60,6 +60,25 @@ const submitFormwithUncheck = () => {
     cy.get('#button-guest').click()
 }
 
+const submitStep3FormwithAllRequiredInformation = () => {
+    // tc 025
+    submitFormwithUncheck()
+
+    // Personal info step 3
+    personalInfo3()
+
+    // submit
+    cy.get('#button-guest-shipping').click()
+
+    // verify
+    cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
+}
+
+const popupMessageErrorAlert = () => {
+    cy.get('.alert').should('be.visible')
+    cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
+}
+
 
 
 export default {
@@ -68,7 +87,8 @@ export default {
     popupMessageErrorAlertInvalidEmailPassword,
     personalInfo2,
     personalInfo3,
-    submitFormwithUncheck,
-    personalInfo3
+    submitStep2FormwithUncheck,
+    popupMessageErrorAlert,
+    
 }
 

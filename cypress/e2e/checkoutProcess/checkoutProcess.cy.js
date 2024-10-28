@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { checkoutWithGuestUser,addItemToCart,popupMessageErrorAlertInvalidEmailPassword,personalInfo2,personalInfo3,submitFormwithUncheck, } from './util'
+import { checkoutWithGuestUser,addItemToCart,popupMessageErrorAlertInvalidEmailPassword,personalInfo2,personalInfo3,submitStep2FormwithUncheck, } from '../util'
 
 describe('Checkout process', () => {
     beforeEach(() => {
@@ -78,7 +78,7 @@ describe('Checkout process', () => {
 
     it('tc026 : Submit Form with all required information', () => {
         // tc 025
-        submitFormwithUncheck()
+        submitStep2FormwithUncheck()
 
         // Personal info step 3
         personalInfo3()
