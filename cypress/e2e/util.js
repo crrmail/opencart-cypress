@@ -11,6 +11,20 @@ const checkoutWithGuestUser = () => {
     cy.get('#button-account').click()
 }
 
+const loginWithEmailandPassword = (email,password) => {
+    cy.get('#input-email').type(email)
+    cy.get('#input-password').type(password)
+    cy.get('form > .btn').click()
+}
+
+const checkoutWithUserlogin = (email,password) => {
+    cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
+    cy.get('.dropdown-menu > :nth-child(2) > a').click()
+    cy.loginWithEmailandPassword(email,password)
+    cy.get('h1 > a').click()
+
+}
+
 const addItemToCart = () => {
     cy.get(':nth-child(7) > a').click()
     cy.get("[onclick=\"cart.add('30', '1');\"]").click()
@@ -98,6 +112,8 @@ const popupAlert = (massegeAlert) => {
 
 export default {
     checkoutWithGuestUser,
+    loginWithEmailandPassword,
+    checkoutWithUserlogin,
     addItemToCart,
     popupMessageErrorAlertInvalidEmailPassword,
     personalInfo2,

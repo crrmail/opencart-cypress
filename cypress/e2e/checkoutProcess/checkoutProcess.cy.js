@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { checkoutWithGuestUser,addItemToCart,popupMessageErrorAlertInvalidEmailPassword,personalInfo2,personalInfo3,submitStep2FormwithUncheck,submitFormWithAllRequiredData,popupAlert } from '../util'
+import { checkoutWithGuestUser,addItemToCart,personalInfo2,personalInfo3,submitStep2FormwithUncheck,submitFormWithAllRequiredData,popupAlert } from '../util'
 
 describe('Checkout process', () => {
     beforeEach(() => {
