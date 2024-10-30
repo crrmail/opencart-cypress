@@ -7,7 +7,7 @@ const checkoutWithGuestUser = () => {
     cy.get('.pull-right > .btn').click()
 
     // select Guest Checkout
-    cy.get(':nth-child(4) > label > input').click()
+    cy.get(':nth-child(1) > :nth-child(4) > label', { timeout: 5000 }).click()
     cy.get('#button-account').click()
 }
 
@@ -15,7 +15,7 @@ const addItemToCart = () => {
     cy.get(':nth-child(7) > a').click()
     cy.get("[onclick=\"cart.add('30', '1');\"]").click()
     cy.get('#input-option226').select('Red')
-    cy.get('#button-cart').click()
+    cy.get('#button-cart',{ timeout: 5000 }).click()
 }
 
 const popupMessageErrorAlertInvalidEmailPassword = () => {
@@ -79,6 +79,21 @@ const popupMessageErrorAlert = () => {
     cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
 }
 
+const submitFormWithAllRequiredData = () => {
+    // add and checkout item
+    checkoutWithGuestUser()
+
+    // Personal info
+    personalInfo2()
+
+    // Submit step 2
+    cy.get('#button-guest').click()
+}
+
+const popupAlert = (massegeAlert) => {
+    cy.get('.alert').should('be.visible')
+    cy.get('.alert').should('have.text',massegeAlert)
+}
 
 
 export default {
@@ -89,6 +104,8 @@ export default {
     personalInfo3,
     submitStep2FormwithUncheck,
     popupMessageErrorAlert,
+    submitFormWithAllRequiredData,
+    popupAlert
     
 }
 
