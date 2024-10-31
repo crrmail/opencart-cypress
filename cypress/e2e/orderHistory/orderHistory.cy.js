@@ -1,9 +1,9 @@
 import testData from '../loginData.json'
 import {personalInfo2,addItemToCart,checkoutWithUserlogin} from '../util'
 
-describe('Order History',() => {
+describe('order History',() => {
     
-    it('tc032 : View Order History', () => {
+    it('cancle', () => {
 
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
         
@@ -37,12 +37,36 @@ describe('Order History',() => {
 
     })
 
-    it.only('tc032 : View Order History2', () => {
+    it.only('tc032 : View Order History', () => {
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
         // 
         //cy.get('.caret').click()
         checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        // view order
+        cy.get('.caret').click()
+        cy.get('.dropdown-menu > :nth-child(2) > a').click()
 
-        
+        // order detail
+        cy.get(':nth-child(1) > :nth-child(7) > .btn').click()
     })
+
+    it.only('tc033 : Reorder from an Existing Order',() => {
+        
+        cy.visit('https://opencart.abstracta.us/index.php?route=account/order')
+        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        // view order
+        cy.get('.caret').click()
+        cy.get('.dropdown-menu > :nth-child(2) > a').click()
+
+        // order detail
+        cy.get(':nth-child(1) > :nth-child(7) > .btn').click()
+
+        // select reorder
+        cy.get('.btn-primary > .fa').click()
+
+        // verify order in cart
+        cy.get('.btn-inverse').click()
+        cy.get(':nth-child(4) > a > .fa').click()
+    })
+
 })
