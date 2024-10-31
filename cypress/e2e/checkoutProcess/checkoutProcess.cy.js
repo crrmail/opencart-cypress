@@ -42,13 +42,13 @@ describe('Checkout process', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
-        // Personal info
+        // personal info
         personalInfo2()
 
-        // Submit step 2
+        // submit step 2
         cy.get('#button-guest').click()
 
-        // verify Proceed to Step 4
+        // verify proceed to step 4
         cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 
@@ -56,7 +56,7 @@ describe('Checkout process', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
-        // Submit step 2
+        // submit step 2
         cy.get('#button-guest').click()
 
         // verify the current step
@@ -67,16 +67,16 @@ describe('Checkout process', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
-        // Personal info step 2
+        // personal info step 2
         personalInfo2()
 
-        // Uncheck “My delivery and billing addresses are the same”
+        // uncheck “My delivery and billing addresses are the same”
         cy.get('.checkbox > label > input').click()
 
-        // Submit step 2
+        // submit step 2
         cy.get('#button-guest').click()
 
-        // verify Proceed to Step 3
+        // verify proceed to step 3
         cy.get('#collapse-shipping-address > .panel-body').should('be.visible')
     })
 
@@ -84,13 +84,13 @@ describe('Checkout process', () => {
         // tc 025
         submitStep2FormwithUncheck()
 
-        // Personal info step 3
+        // personal info step 3
         personalInfo3()
 
         // submit step 3
         cy.get('#button-guest-shipping').click()
 
-        // verify Proceed to Step 4
+        // verify proceed to step 4
         cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 
@@ -117,22 +117,22 @@ describe('Checkout process', () => {
     })
 
     it('tc029 : step5 Select payment method with acceptance',() => {
-        // Pass Step 4
+        // pass step 4
         submitFormWithAllRequiredData()
         cy.get('#button-shipping-method').click()
         
-        // Select Accept
+        // select accept
         cy.get('.pull-right > [type="checkbox"]').click()
 
         // submit step 5
         cy.get('#button-payment-method').click()
 
-        // verify Proceed to Step 6
+        // verify proceed to step 6
         cy.get('#collapse-checkout-confirm > .panel-body',{ timeout: 5000 }).should('be.visible')
     })
 
     it('tc030 : step5 Select payment method without acceptance',() => {
-        // Pass Step 4
+        // pass step 4
         submitFormWithAllRequiredData()
         cy.get('#button-shipping-method').click()
 
@@ -144,7 +144,7 @@ describe('Checkout process', () => {
     })
 
     it('tc031 : step6 Confirm order',() => {
-        // Pass Step 5
+        // pass step 5
         submitFormWithAllRequiredData()
         cy.get('#button-shipping-method').click()
         cy.get('.pull-right > [type="checkbox"]').click()
@@ -153,7 +153,7 @@ describe('Checkout process', () => {
         // submit confirm order
         cy.get('#button-confirm').click()
 
-        //verify Confirm order success
+        // verify confirm order success
         cy.get('#content').should('be.visible')
         cy.get('#content').should('have.text','\n      Your order has been placed!\n      Your order has been successfully processed!Please direct any questions you have to the store owner.Thanks for shopping with us online!\n      \n        Continue\n      \n      ')
     })

@@ -1,4 +1,5 @@
 import { uuidv7 } from "uuidv7";
+import { popupAlert } from '../util'
 
 describe('registeration', () => {
     beforeEach (() => {
@@ -27,9 +28,6 @@ describe('registeration', () => {
         cy.url().should('eq','http://opencart.abstracta.us/index.php?route=account/success')
         cy.get('#content > h1').should('be.visible')
         cy.get('#content > h1').should('have.text','Account')
-
-
-
     })
     
     it('tc002 : registeration when invalid data should fail', () => {
@@ -46,10 +44,7 @@ describe('registeration', () => {
         cy.get('.pull-right > .btn').click()
 
         // pop up message error alert
-        cy.get('.alert').should('be.visible')
-        cy.get('.alert').should('have.text',' Warning: E-Mail Address is already registered!')
-
-
+        popupAlert(' Warning: E-Mail Address is already registered!')
     })
 
     it('tc0033 :registeration when have null data should fail', () => {

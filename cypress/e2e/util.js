@@ -93,6 +93,11 @@ const popupMessageErrorAlert = () => {
     cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
 }
 
+const popupAlert = (massegeAlert) => {
+    cy.get('.alert').should('be.visible')
+    cy.get('.alert').should('have.text',massegeAlert)
+}
+
 const submitFormWithAllRequiredData = () => {
     // add and checkout item
     checkoutWithGuestUser()
@@ -104,10 +109,7 @@ const submitFormWithAllRequiredData = () => {
     cy.get('#button-guest').click()
 }
 
-const popupAlert = (massegeAlert) => {
-    cy.get('.alert').should('be.visible')
-    cy.get('.alert').should('have.text',massegeAlert)
-}
+
 
 
 export default {

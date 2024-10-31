@@ -1,15 +1,15 @@
 import testData from '../loginData.json'
-import { popupMessageErrorAlert } from '../util'
+import { popupMessageErrorAlert,loginWithEmailandPassword,popupAlert } from '../util'
 
 describe('login', () => {
     beforeEach(() => {
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
         cy.goToLoginFromHome()
-        
     })
 
     it('tc004 : Login success with valid email and password', () => {
-        cy.loginWithEmailandPassword(testData.validEmail,testData.validPassword)
+        // login with valid email and password
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
 
         // verify for success
         cy.url().should('eq','https://opencart.abstracta.us/index.php?route=account/account')
@@ -23,7 +23,7 @@ describe('login', () => {
 
     it('tc005 : Login fails with invalid email and password', () => {
         // login with invalid email and password
-        cy.loginWithEmailandPassword(testData.invalidEmail,testData.invalidPassword)
+        loginWithEmailandPassword(testData.invalidEmail, testData.invalidPassword)
 
         // pop up message error alert
         popupMessageErrorAlert()
@@ -60,8 +60,7 @@ describe('login', () => {
         cy.get('#input-email').type(testData.validEmail)
         cy.get('.pull-right > .btn').click()
 
-        // pop up message alert
-        cy.get('.alert').should('be.visible')
-        cy.get('.alert').should('have.text',' An email with a confirmation link has been sent your email address.')
+        // pop up message alert 
+        popupAlert(' An email with a confirmation link has been sent your email address.')
     })
 })

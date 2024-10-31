@@ -22,8 +22,9 @@ describe('Add item to cart',() => {
         cy.get("[onclick=\"cart.add('43');\"]").click()
 
         // verify add item to cart success
+        //
     })
-    it.only('tc019 : View Items in Cart',() => {
+    it('tc019 : View Items in Cart',() => {
         // add item to cart
         cy.get('.nav > :nth-child(4) > a').click()
         cy.get("[onclick=\"cart.add('49', '1');\"]").click()
@@ -34,6 +35,7 @@ describe('Add item to cart',() => {
 
         // verify view Items in cart
         cy.get('#content > h1').should('be.visible')
+        //have text
     })
     it('tc020 : Remove Item from Cart',() => {
         // add item to cart
