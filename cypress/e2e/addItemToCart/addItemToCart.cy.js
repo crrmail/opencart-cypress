@@ -1,29 +1,33 @@
 import testData from '../loginData.json'
+import { loginWithEmailandPassword,popupAlert } from '../util'
 
 describe('Add item to cart',() => {
     beforeEach(() => {
         // home page
         cy.visit('https://opencart.abstracta.us/index.php?route=common/home')
     })
+
     it('tc017 : Add to cart after successful login',() => {
         // login
         cy.goToLoginFromHome()
-        cy.loginWithEmailandPassword(testData.validEmail,testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail,testData.validPassword)
         cy.get('h1 > a').click()
 
         // add item to cart
         cy.get("[onclick=\"cart.add('43');\"]").click()
         
         // verify add item to cart success
-        //cy.popupAlert( Success: You have added MacBook to your shopping cart!)
+        popupAlert(' Success: You have added MacBook to your shopping cart!')
     })
+
     it('tc0018 : Add item to cart without login',() => {
         // add item to cart
         cy.get("[onclick=\"cart.add('43');\"]").click()
 
         // verify add item to cart success
-        //
+        popupAlert(' Success: You have added MacBook to your shopping cart!')
     })
+
     it('tc019 : View Items in Cart',() => {
         // add item to cart
         cy.get('.nav > :nth-child(4) > a').click()
@@ -34,9 +38,11 @@ describe('Add item to cart',() => {
         cy.get(':nth-child(4) > a > .fa').click()
 
         // verify view Items in cart
+        cy.get('h2').should('be.visible')
         cy.get('#content > h1').should('be.visible')
-        //have text
+        cy.get('.table-responsive').should('be.visible')
     })
+
     it('tc020 : Remove Item from Cart',() => {
         // add item to cart
         cy.get('.nav > :nth-child(4) > a').click()
@@ -51,6 +57,9 @@ describe('Add item to cart',() => {
 
         // verify remove Item from cart
         cy.get('#content > h1').should('be.visible')
-        cy.get('#content > p').should('be.visible')
+
+        cy.get('h2').should('be.visible')
+        cy.get('#content > p').should('have.text','Your shopping cart is empty!')
+        cy.get('#content').should('be.visible')
     })
 })

@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { checkoutWithGuestUser,addItemToCart,personalInfo2,personalInfo3,submitStep2FormwithUncheck,submitFormWithAllRequiredData,popupAlert } from '../util'
+import { loginWithEmailandPassword,checkoutWithGuestUser,addItemToCart,personalInfo2,personalInfo3,submitStep2FormwithUncheck,submitFormWithAllRequiredData,popupAlert } from '../util'
 
 describe('Checkout process', () => {
     beforeEach(() => {
@@ -10,7 +10,7 @@ describe('Checkout process', () => {
     it('tc021 : step1 Checkout after login successful', () => {
         // login success
         cy.goToLoginFromHome()
-        cy.loginWithEmailandPassword(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
         cy.get('h1 > a').click()
 
         // add item to cart
@@ -38,7 +38,7 @@ describe('Checkout process', () => {
 
     })
 
-    it('tc023 : step2 Submit Form with all required data with defualt acceptance', () => {
+    it('tc023 : step2 Submit form with all required data with defualt acceptance', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
@@ -52,7 +52,7 @@ describe('Checkout process', () => {
         cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 
-    it('tc024 : step2 Submit Form with missing required data', () => {
+    it('tc024 : step2 Submit form with missing required data', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
@@ -63,7 +63,7 @@ describe('Checkout process', () => {
         cy.get('#account > :nth-child(3) > .text-danger').should('be.visible')
     })
 
-    it('tc025 : step2 Submit Form with all required data without acceptance', () => {
+    it('tc025 : step2 Submit form with all required data without acceptance', () => {
         // add and checkout item
         checkoutWithGuestUser()
 
@@ -80,7 +80,7 @@ describe('Checkout process', () => {
         cy.get('#collapse-shipping-address > .panel-body').should('be.visible')
     })
 
-    it('tc026 : step3 Submit Form with all required information', () => {
+    it('tc026 : step3 Submit form with all required data', () => {
         // tc 025
         submitStep2FormwithUncheck()
 
@@ -94,7 +94,7 @@ describe('Checkout process', () => {
         cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
     })
 
-    it('tc027 : step3 Submit Form with missing required information',() => {
+    it('tc027 : step3 Submit form with missing required data',() => {
         // tc 025
         submitStep2FormwithUncheck()
 
@@ -105,7 +105,7 @@ describe('Checkout process', () => {
         cy.get(':nth-child(1) > .col-sm-10 > .text-danger').should('be.visible')
     })
 
-    it('tc028 : step4 Select Flat Rate (Defualt)',() => {
+    it('tc028 : step4 Select flat Rate (Defualt)',() => {
         
         submitFormWithAllRequiredData()
 

@@ -11,19 +11,25 @@ const checkoutWithGuestUser = () => {
     cy.get('#button-account').click()
 }
 
-const loginWithEmailandPassword = (email,password) => {
+const loginData = (email,password) => {
     cy.get('#input-email').type(email)
     cy.get('#input-password').type(password)
     cy.get('form > .btn').click()
 }
 
-const checkoutWithUserlogin = (email,password) => {
+const loginWithEmailandPassword = (email,password) => {
     cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
     cy.get('.dropdown-menu > :nth-child(2) > a').click()
-    cy.loginWithEmailandPassword(email,password)
-    cy.get('h1 > a').click()
-
+    loginData(email,password)
+    //cy.get('h1 > a').click()
 }
+
+const logout = () => {
+    cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
+    cy.get('.dropdown-menu > :nth-child(5) > a').click()
+    cy.get('.pull-right > .btn').click()
+}
+
 
 const addItemToCart = () => {
     cy.get(':nth-child(7) > a').click()
@@ -74,20 +80,6 @@ const submitStep2FormwithUncheck = () => {
     cy.get('#button-guest').click()
 }
 
-const submitStep3FormwithAllRequiredInformation = () => {
-    // tc 025
-    submitFormwithUncheck()
-
-    // Personal info step 3
-    personalInfo3()
-
-    // submit
-    cy.get('#button-guest-shipping').click()
-
-    // verify
-    cy.get('#collapse-shipping-method > .panel-body').should('be.visible')
-}
-
 const popupMessageErrorAlert = () => {
     cy.get('.alert').should('be.visible')
     cy.get('.alert').should('have.text',' Warning: No match for E-Mail Address and/or Password.')
@@ -115,7 +107,8 @@ const submitFormWithAllRequiredData = () => {
 export default {
     checkoutWithGuestUser,
     loginWithEmailandPassword,
-    checkoutWithUserlogin,
+    loginData,
+    logout,
     addItemToCart,
     popupMessageErrorAlertInvalidEmailPassword,
     personalInfo2,

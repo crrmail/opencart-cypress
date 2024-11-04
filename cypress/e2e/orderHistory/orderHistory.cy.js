@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import {addItemToCart,checkoutWithUserlogin} from '../util'
+import {addItemToCart,loginWithEmailandPassword} from '../util'
 
 describe('order History',() => {
     beforeEach(() => {
@@ -8,7 +8,7 @@ describe('order History',() => {
     
     it('cancle', () => {        
         
-        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
         
         // add item to cart
         addItemToCart()
@@ -37,7 +37,7 @@ describe('order History',() => {
 
     it('tc032 : View Order History', () => {
         // login
-        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
         
         // view order
         cy.get('.caret').click()
@@ -49,7 +49,7 @@ describe('order History',() => {
 
     it('tc033 : Reorder from an Existing Order',() => {
         // login
-        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
        
         // view order
         cy.get('.caret').click()
@@ -67,7 +67,7 @@ describe('order History',() => {
     })
 
     it.only('tc034 : Return order with select require checkbok',() => {
-        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
 
          // view order
          cy.get('.caret').click()
@@ -90,7 +90,7 @@ describe('order History',() => {
     })
 
     it('tc035 : Return order without select require checkbok',() => {
-        checkoutWithUserlogin(testData.validEmail, testData.validPassword)
+        loginWithEmailandPassword(testData.validEmail, testData.validPassword)
 
          // view order
          cy.get('.caret').click()

@@ -12,13 +12,8 @@ describe('login', () => {
         loginWithEmailandPassword(testData.validEmail, testData.validPassword)
 
         // verify for success
+        cy.get('#content > :nth-child(1)').should('have.text','My Account')        
         cy.url().should('eq','https://opencart.abstracta.us/index.php?route=account/account')
-        cy.get('#content > :nth-child(1)').should('have.text','My Account')
-
-        // log out
-        cy.get('.list-inline > .dropdown > .dropdown-toggle').click()
-        cy.get('.dropdown-menu > :nth-child(5) > a').click()
-        cy.get('.pull-right > .btn').click()
     })
 
     it('tc005 : Login fails with invalid email and password', () => {
