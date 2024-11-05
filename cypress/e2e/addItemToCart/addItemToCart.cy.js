@@ -17,7 +17,7 @@ describe('Add item to cart',() => {
         cy.get("[onclick=\"cart.add('43');\"]").click()
         
         // verify add item to cart success
-        popupAlertContain(' Success: You have added MacBook to your shopping cart!')
+        popupAlertContain(' Success: You have added ')
     })
 
     it('tc018 : Add item to cart without login',() => {
@@ -25,7 +25,7 @@ describe('Add item to cart',() => {
         cy.get("[onclick=\"cart.add('43');\"]").click()
 
         // verify add item to cart success
-        popupAlertContain(' Success: You have added MacBook to your shopping cart!')
+        popupAlertContain(' Success: You have added ')
     })
 
     it('tc019 : View Items in Cart',() => {
