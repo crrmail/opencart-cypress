@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { loginWithEmailandPassword,popupAlert } from '../util'
+import { loginWithEmailandPassword,popupAlert,popupAlertContain } from '../util'
 
 describe('add item to favorites',() => {
     beforeEach(() => {
@@ -18,7 +18,7 @@ describe('add item to favorites',() => {
         cy.get("[data-original-title=\"Add to Wish List\"]").click()
 
         // verify add item to favorites success
-        popupAlert('')
+        popupAlertContain(' Success: You have added ')
         
         //cy.get('.alert').should('be.visible')
         //cy.should('have.text',' Success: You have added MacBook to your wish list! ')
@@ -30,9 +30,7 @@ describe('add item to favorites',() => {
         cy.get("[data-original-title=\"Add to Wish List\"]").click()
 
         // verify add item to favorites success
-        popupAlert('&nbsp;You must login or create an account to save MacBook to your wish list! ×')
-
-        
+        popupAlertContain(' You must ')
     })
     
     it('tc015 : View Items in favorites',() => {

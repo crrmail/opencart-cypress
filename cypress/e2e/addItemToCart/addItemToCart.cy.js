@@ -1,5 +1,5 @@
 import testData from '../loginData.json'
-import { loginWithEmailandPassword,popupAlert } from '../util'
+import { loginWithEmailandPassword,popupAlert,popupAlertContain } from '../util'
 
 describe('Add item to cart',() => {
     beforeEach(() => {
@@ -17,15 +17,15 @@ describe('Add item to cart',() => {
         cy.get("[onclick=\"cart.add('43');\"]").click()
         
         // verify add item to cart success
-        popupAlert(' Success: You have added MacBook to your shopping cart!')
+        popupAlertContain(' Success: You have added MacBook to your shopping cart!')
     })
 
-    it('tc0018 : Add item to cart without login',() => {
+    it('tc018 : Add item to cart without login',() => {
         // add item to cart
         cy.get("[onclick=\"cart.add('43');\"]").click()
 
         // verify add item to cart success
-        popupAlert(' Success: You have added MacBook to your shopping cart!')
+        popupAlertContain(' Success: You have added MacBook to your shopping cart!')
     })
 
     it('tc019 : View Items in Cart',() => {

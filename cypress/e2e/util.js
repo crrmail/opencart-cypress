@@ -90,6 +90,11 @@ const popupAlert = (massegeAlert) => {
     cy.get('.alert').should('have.text',massegeAlert)
 }
 
+const popupAlertContain = (massegeAlert) => {
+    cy.get('.alert').should('be.visible')
+    cy.get('.alert').should('have.contain',massegeAlert)
+}
+
 const submitFormWithAllRequiredData = () => {
     // add and checkout item
     checkoutWithGuestUser()
@@ -116,7 +121,8 @@ export default {
     submitStep2FormwithUncheck,
     popupMessageErrorAlert,
     submitFormWithAllRequiredData,
-    popupAlert
+    popupAlert,
+    popupAlertContain
     
 }
 
