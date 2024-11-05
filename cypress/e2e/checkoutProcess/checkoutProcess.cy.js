@@ -128,7 +128,7 @@ describe('Checkout process', () => {
         cy.get('#button-payment-method').click()
 
         // verify proceed to step 6
-        cy.get('#collapse-checkout-confirm > .panel-body',{ timeout: 5000 }).should('be.visible')
+        cy.get('.table-responsive').should('be.visible')
     })
 
     it('tc030 : step5 Select payment method without acceptance',() => {
