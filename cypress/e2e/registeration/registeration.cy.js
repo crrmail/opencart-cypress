@@ -47,7 +47,7 @@ describe('registeration', () => {
         popupAlert(' Warning: E-Mail Address is already registered!')
     })
 
-    it('tc0033 :registeration when have null data should fail', () => {
+    it('tc003 :registeration when have null data should fail', () => {
         cy.get('.dropdown > .dropdown-toggle > .fa').click()
         cy.get('.dropdown-menu > :nth-child(1) > a').click()
 
